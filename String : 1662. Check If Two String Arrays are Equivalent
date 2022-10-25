@@ -1,0 +1,13 @@
+/* 1662. Check If Two String Arrays are Equivalent
+   Link : https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/description/
+*/
+class Solution {
+public:
+    bool arrayStringsAreEqual(vector<string>& word1, vector<string>& word2) {
+        string string1,string2;
+        for(auto i:word1) string1+=i;
+        for(auto i:word2) string2+=i;
+
+        return (string1==string2);
+    }
+};
