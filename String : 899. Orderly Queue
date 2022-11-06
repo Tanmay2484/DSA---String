@@ -1,0 +1,18 @@
+/* 899. Orderly Queue
+  Link : https://leetcode.com/problems/orderly-queue/description/
+*/
+class Solution {
+public:
+    string orderlyQueue(string s, int k) {
+        if(k>1){
+            sort(s.begin(),s.end());// only one element then just we can sort 
+            return s;
+        }
+        
+        string res=s;
+        for(int i=1;i<size(s);i++)
+            res=min(res,s.substr(i)+s.substr(0,i));// getting the minimum string 
+        
+        return res;
+    }
+};
