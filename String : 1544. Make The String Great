@@ -1,0 +1,23 @@
+/* 1544. Make The String Great
+  Link : https://leetcode.com/problems/make-the-string-great/description/
+*/
+class Solution {
+public:
+    string makeGood(string s) {
+        stack <char> st; //create stack of characters
+        st.push(s[0]); //push the first element
+        for(int i=1;i<s.length();++i) //start comparing from 2nd character if the string
+        {
+            if(st.empty()|| (st.top()-s[i] != 32 && s[i]-st.top() != 32)) st.push(s[i]); // push the character if the stack is empty or in the pair of consecutive characters one is uppercase of the other
+            else st.pop(); // difference of ASCII value of lowercase from its uppercase is 32
+        }
+        string goodString="";
+        while(!st.empty())  // pop the remaining stack
+        {
+            goodString+=st.top();
+            st.pop();
+        }
+        reverse(goodString.begin(),goodString.end()); // reverse the string as stack pops in reverse order
+        return goodString;
+    }
+};
