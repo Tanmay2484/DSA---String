@@ -1,0 +1,37 @@
+/* 151. Reverse Words in a String
+   Link : https://leetcode.com/problems/reverse-words-in-a-string/description/
+*/
+class Solution {
+public:
+    string reverseWords(string s) {
+       int n=s.size();
+        int i=0,j=n-1;
+        while(i<n&&s[i]==' ') i++;
+        while(j>=0&&s[j]==' ') j--;
+        if(i>j) return "";
+        int l=j;
+        int start=i;
+        i=i+1,j=i;
+        
+        // middle word spaces 
+        for(;i<=l;i++) 
+            if(s[i]==' '&&s[i-1]==' ') continue;
+            else s[j++]=s[i];
+        
+        s=s.substr(start,j-start)+" ";
+        n=s.size();
+        int st=0;
+        for(int i=0;i<n;i++){
+            if(s[i]==' '){
+                // reverse word from start to i-1
+                int j=i-1;
+                while(st<j) swap(s[st++],s[j--]);
+                st=i+1;
+            }
+        }
+        s.pop_back(); // extra space last
+        i=0,j=n-2;
+        while(i<j) swap(s[i++],s[j--]);
+        return s;
+    }
+};
