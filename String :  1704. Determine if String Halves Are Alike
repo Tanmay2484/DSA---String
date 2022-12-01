@@ -1,0 +1,20 @@
+/* 1704. Determine if String Halves Are Alike
+   Link : https://leetcode.com/problems/determine-if-string-halves-are-alike/description/
+*/
+class Solution {
+public:
+    bool halvesAreAlike(string s) {
+      int n=s.size(),half=n/2;
+      string v="aeiouAEIOU";
+      string s1=s.substr(0,half),s2=s.substr(half,half);
+      int chk1=0,chk2=0;
+      for(int i=0;i<s1.size();i++){
+          if(v.find(s1[i])!=-1) chk1++;
+      }
+      for(int i=0;i<s2.size();i++){
+          if(v.find(s2[i])!=-1) chk2++;
+      }
+      cout<<chk1<<" "<<chk2;
+      return (chk1==chk2);
+    }
+};
