@@ -1,0 +1,15 @@
+/* 451. Sort Characters By Frequency
+  Link : https://leetcode.com/problems/sort-characters-by-frequency/description/
+*/
+   class Solution {
+public:
+    string frequencySort(string s) {
+        //unordered_map<char, int> freq; //ok
+        //vector<int> freq(128,0); // ok
+        int freq[128]={0};
+        for(char  c: s) ++freq[c];
+        sort(s.begin(), s.end(), [&](const auto& a,const auto& b){return freq[a] > freq[b] || freq[a] == freq[b] && a < b;});
+        //sort(s.begin(), s.end(), [&](const auto& a,const auto& b){return freq[a] > freq[b];}); // Wrong. Note1
+        return s;
+    }
+};
