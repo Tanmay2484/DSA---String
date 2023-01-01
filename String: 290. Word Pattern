@@ -1,0 +1,24 @@
+/* 290. Word Pattern
+   Link: https://leetcode.com/problems/word-pattern/description/
+*/
+class Solution {
+public:
+   bool wordPattern(string p, string s) {
+        unordered_map<char,string>mp;
+        unordered_map<string,char>rev;
+        s.push_back(' ');
+        string temp="";
+        int i=0;
+        for(auto c:s){
+            if(c==' '){
+                if(mp.count(p[i])||rev.count(temp))
+                    if(rev[temp]!=p[i]||mp[p[i]]!=temp) return false;
+                mp[p[i]]=temp;
+                rev[temp]=p[i++];
+                temp="";
+            }else
+                temp.push_back(c);
+        }
+        return i==p.size();
+    }
+};
