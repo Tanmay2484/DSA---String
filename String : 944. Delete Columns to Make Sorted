@@ -1,0 +1,26 @@
+/* 944. Delete Columns to Make Sorted
+   Link: https://leetcode.com/problems/delete-columns-to-make-sorted/description/
+*/
+class Solution {
+public:
+    int minDeletionSize(vector<string>& A) {
+        int cy = A.size();
+        if (cy == 0) return 0;
+        
+        int cx = A[0].length();
+        if (cx == 0) return 0;
+        
+        int c = 0;
+        for (int x = 0; x < cx; ++x) {
+            for (int y = 1; y < cy; ++y) {
+                int d = A[y][x] - A[y - 1][x];
+                if (d < 0) {
+                    ++c;
+                    break;
+                }
+            }
+        }
+        
+        return c;
+    }
+};
