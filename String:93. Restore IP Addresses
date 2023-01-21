@@ -1,0 +1,35 @@
+/* 93. Restore IP Addresses
+   Link: https://leetcode.com/problems/restore-ip-addresses/description/
+*/  
+class Solution {
+public:
+    vector<string>res;
+    void helper(string &s , int i , int cnt , string ip){
+        if(i==s.size()){
+            ip.pop_back();
+            if(cnt==4) res.push_back(ip);
+            return ;
+        }
+        
+        if(!isdigit(s[i])) return helper(s,i+1,cnt,ip);
+            
+        if(s[i]=='0') {
+            helper(s,i+1,cnt+1,ip+s[i]+'.');
+        }else{
+            int num=0;
+            while(num<=255 and i<s.size()){
+                num=num*10+(s[i]-'0');
+                if(num<=255){
+                    helper(s,i+1,cnt+1,ip+to_string(num)+".");
+                }
+                i++;
+            }
+        }
+        
+    }
+    
+    vector<string> restoreIpAddresses(string s) {
+        helper(s,0,0,"");
+        return res;
+    }
+};
