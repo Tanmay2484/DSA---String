@@ -1,0 +1,71 @@
+/*352. Data Stream as Disjoint Intervals
+  Link: https://leetcode.com/problems/data-stream-as-disjoint-intervals/description/
+*/
+class SummaryRanges {
+public:
+    
+    map<int,int>track;
+    vector<vector<int>>res;
+    bool modified;
+    
+    SummaryRanges() {
+        
+        modified = false;
+    }
+    
+    void addNum(int val) {
+        
+        int left = val;
+        int right = val + 1;
+        
+        // get upper bound of the left
+        auto iter = track.upper_bound(left);
+                
+        // if not first element then check previous element
+        if(iter!=track.begin())
+        {
+            auto piter = prev(iter);
+            
+            // if previous interval overlaps with current interval and merge range
+            if(piter->second >= left)
+            {
+                left = piter->first;
+                right = max(right,piter->second);
+                
+                // delete overlapped interval
+                track.erase(piter);
+            }
+        }
+        
+        // loop until current interval overlaps with Map intervals
+        while(iter!=track.end() && iter->first<=right)
+        {
+            right = max(right,iter->second);
+            
+            // delete overlapped interval
+            track.erase(iter++);
+        }
+                
+        // store updated range in Map
+        track[left] = right;
+        
+        modified = true;
+    }
+    
+    vector<vector<int>> getIntervals() {
+     
+        // get updated intervals if modified
+        if(modified)
+        {
+            vector<vector<int>>tres;
+            
+            for(auto &iter : track)
+                tres.push_back({iter.first,iter.second-1});
+                        
+            res.swap(tres);
+        }
+        
+        modified = false;
+        return res;
+    }
+};
