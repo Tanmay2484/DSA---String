@@ -4,7 +4,7 @@
 class Solution {
 public:
     bool halvesAreAlike(string s) {
-      int n=s.size(),half=n/2;
+      int n=s.size(),half=n/2;//ok
       string v="aeiouAEIOU";
       string s1=s.substr(0,half),s2=s.substr(half,half);
       int chk1=0,chk2=0;
