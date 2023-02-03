@@ -1,0 +1,53 @@
+#define ll int
+class Solution {
+/* 6. Zigzag Conversion
+   Link: https://leetcode.com/problems/zigzag-conversion/description/
+*/
+public:
+    string convert(string s, int numRows) {
+        vector<vector<char>>v(numRows,vector<char>(s.size(),'1'));
+        ll r = 0, c = 0, flag = 0;
+        if(numRows == 1)
+        {
+            return s;
+        }
+        for(ll i=0;i<s.size();i++)
+        {
+            if(flag == 0)
+            {
+                v[r][c] = s[i];
+                r++;
+                if(r == numRows)
+                {
+                    flag = 1;
+                    r-=2;
+                    c++;
+                }
+            }
+            else
+            {
+                v[r][c] = s[i];
+                r--;
+                c++;
+                if(r == -1)
+                {
+                    flag = 0;
+                    r+=2;
+                    c--;
+                }
+            }
+        }
+        string ans = "";
+        for(ll i=0;i<v.size();i++)
+        {
+            for(ll j=0;j<v[0].size();j++)
+            {
+                if(v[i][j] != '1')
+                {
+                    ans.push_back(v[i][j]);
+                }
+            }
+        }
+        return ans;
+    }
+};
