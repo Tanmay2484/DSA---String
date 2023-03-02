@@ -1,0 +1,23 @@
+/* 443. String Compression
+ Link: https://leetcode.com/problems/string-compression/description/
+*/
+class Solution {
+public:
+    
+int compress(vector<char>& chars) {
+        char prev=chars[0];
+        int cnt=1,k=0;
+        for(int i=1;i<=chars.size();i++){
+          if(i<chars.size() and chars[i]==prev) cnt++;
+          else{
+              chars[k++]=prev;
+              if(cnt>1){
+                  string s=to_string(cnt);
+                  for(char c:s) chars[k++]=c;
+               }
+              if(i<chars.size()) cnt=1,prev=chars[i];
+            }
+        }
+        return k;
+    }
+};
