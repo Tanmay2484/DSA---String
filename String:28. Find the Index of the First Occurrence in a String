@@ -1,0 +1,34 @@
+/* 28. Find the Index of the First Occurrence in a String
+   Link: https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/description/
+*/
+class Solution {
+public:
+    
+    int strStr(string haystack, string needle) {
+       string s=needle+"#"+haystack;
+       int diff=2*needle.size();
+       vector<int>res=lps(s);
+       for(int i=0;i<res.size();i++)
+           if(res[i]==needle.size()) return i-diff;
+        return -1;
+    }
+    
+    vector<int>lps(string s){
+        int n=s.size();
+        vector<int>res(n,0);
+        int len=0,i=1;
+        while(i<n){
+            if(s[i]==s[len]){
+                len++;
+                res[i]=len;
+                i++;
+            }else{
+                if(len>0)
+                    len=res[len-1];
+                else
+                    i++;
+            }
+        }
+        return res;
+    }
+};
