@@ -1,0 +1,33 @@
+/* 2405. Optimal Partition of String
+   Link: https://leetcode.com/problems/optimal-partition-of-string/description/
+*/
+class Solution {
+public:
+    int partitionString(string s) {
+    int n=s.length();
+    
+    map<char,int> mp;
+    
+   int c=0; // count of distinct characters in current string window
+   int i=0, j=0;
+    int ans=0;
+    while(j<n){
+        char ch=s[j];
+        mp[ch]++;
+        c++;
+        
+		// some character is repeated, so we need to make a partition
+        if(c>mp.size()){
+            ans++;
+            mp.clear();
+            
+            c=1;
+            i=j;
+            mp[ch]++;
+        }
+        j++;
+    }
+    
+    return ans+1; // +1 for considering last partition
+}
+};
