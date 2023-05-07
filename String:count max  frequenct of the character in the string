@@ -1,0 +1,30 @@
+//count max  frequenct of the character in the string
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+   string s;
+   cin>>s;
+   int arr[26]={0};
+   for(int i=0;i<s.length();i++){
+       //for lower case
+       int num;
+       if(s[i]>='a'&&s[i]<='z'){
+           num=s[i]-'a';
+       }
+       // upper case
+       else{
+           num=s[i]+'a';
+          
+       }
+        arr[num]++;
+   }
+   int max=-1,ans;
+   for(int i=0;i<s.length();i++){
+       if(max<arr[i]){
+           ans=i;
+           max=arr[i];
+       }
+   }
+   char finalans='a'+ans;
+   cout<<finalans;
+}
