@@ -1,0 +1,27 @@
+/* 186. Reverse Words in a String II
+ Link: https://leetcode.com/problems/reverse-words-in-a-string-ii/
+*/
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+   //Reverse words in a sentence
+    string s,ans,temp="";
+    getline(cin,s);
+    
+    for(int i=0;i<s.length()+1;i++){
+        if((s[i]==' ')||(s[i]=='\0')){
+            reverse(temp.begin(),temp.end());
+            ans+=temp+' ';
+            
+            temp="";
+        }
+        else{
+            temp.push_back(s[i]);
+            
+        }
+    }
+    ans.pop_back();
+    cout<<ans;
+
+}
+
