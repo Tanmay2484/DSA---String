@@ -2,10 +2,10 @@
 using namespace std;
 
 string result(string s){
-    int temp;
+    int max_count=0,count=0;
     string st="",sr="";
     for(int i=0;i<s.length();i++){
-        int max_count=0,count=0;
+        max_count=0,count=0;
         if(s[i]==' '){
             int freq[26]={0};
             for(int j=0;j<sr.length();j++){
@@ -23,12 +23,25 @@ string result(string s){
         else{
             sr+=s[i];
         }
+         int freq1[26]={0};
+         count=0;
+         for(int j=0;j<sr.length();j++){
+                freq1[sr[j]-'a']++;
+            }
+            for(int j=0;j<26;j++){
+                if(freq1[j]>1) count++;
+            }
+            if(count>max_count){
+                max_count=count;
+                st=sr;
+            }
+        
     }
     return st;
 }
 
 int main() {
-   string str="abcdefghij google mmiiccrrossooft pp";
+   string str="abcdefghij google pp mmiiccrrossooft";
    cout<<result(str);
   return 0;
 }
